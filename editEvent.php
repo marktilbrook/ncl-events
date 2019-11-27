@@ -16,7 +16,6 @@ require_once "functions.php";
 //this creates a reference to the connection which is in the functions.php file
 $connection = getConnection();
 
-
 //we want to show all event details based upon the event selected
 
 //if the the selected event is chosen, store it in $selectedEvent
@@ -31,8 +30,6 @@ else
 }
 
 //this echos out the selected event, all details area shown except the description
-//$sqlStatement = "SELECT eventID, eventTitle, venueID, catID, eventStartDate, eventEndDate, eventPrice from NE_events
-//                 WHERE eventTitle = '$selectedEvent'";//todo join event and category table to sort out venueID and catID
 $sqlStatement = "SELECT eventID, eventTitle, venueName, catDesc, eventStartDate, eventEndDate, eventPrice FROM NE_events
                  JOIN NE_venue ON NE_events.venueID = NE_venue.venueID
                  JOIN NE_category ON NE_events.catID = NE_category.catID
@@ -91,27 +88,43 @@ while ($rowObj = $queryResult->fetchObject())
 
 
 ?>
-<!--todo create this php file-->
-<form method="get" action="addNewEvent.php">
+
+<form method="get" action="processForm.php">
     Event Title: <input type="text" name="eventTitle">
     Event Description: <textarea name="eventDescription"></textarea>
-    Venue ID:
+    Venue:
     <select name="venueID">
-        <option value="c1">CD</option>
-        <option value="c2">DVD</option>
-        <option value="c3">Software</option>
+        <option value="v1">Theatre Royal</option>
+        <option value="v2">BALTIC Centre for Contemporary Art</option>
+        <option value="v3">Laing Art Gallery</option>
+        <option value="v4">The Biscuit Factory</option>
+        <option value="v5">Discovery Museum</option>
+        <option value="v6">HMS Calliope</option>
+        <option value="v7">Utilita Arena Newcastle</option>
+        <option value="v8">Mill Volvo Tyne Theatre</option>
+        <option value="v9">PLAYHOUSE Whitley Bay</option>
+        <option value="v10">Shipley Art Gallery</option>
+        <option value="v11">Seven Stories</option>
     </select>
-    Category ID:
+    Category:
     <select name="categoryID">
-        <option value="c1">CD</option>
-        <option value="c2">DVD</option>
-        <option value="c3">Software</option>
+        <option value="c1">Carnival</option>
+        <option value="c2">Theatre</option>
+        <option value="c3">Comedy</option>
+        <option value="c4">Exhibition</option>
+        <option value="c5">Festival</option>
+        <option value="c6">Family</option>
+        <option value="c7">Music</option>
+        <option value="c8">Sport</option>
+        <option value="c9">Dance</option>
     </select>
     Event Start Date: <input type="date" name="eventStartDate">
     Event End Date: <input type="date" name="eventEndDate">
     Price <input type="text" name="eventPrice">
     <input type="submit" value="Add Event">
 </form>
+
+
 
 
 
