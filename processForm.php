@@ -18,6 +18,10 @@ function validate_form()
     $errors = array();
 
     //storing variables into array - also trimming them of whitespace
+    $input['eventID'] = filter_has_var(INPUT_GET, 'eventID') ?
+        $_GET['eventID'] : null;
+    $input['eventID'] = trim($input['eventID']);
+
     $input['eventTitle'] = filter_has_var(INPUT_GET, 'eventTitle') ?
         $_GET['eventTitle'] : null;
     $input['eventTitle'] = trim($input['eventTitle']);
@@ -45,6 +49,8 @@ function validate_form()
     $input['eventPrice'] = filter_has_var(INPUT_GET, 'eventPrice') ?
         $_GET['eventPrice'] : null;
     $input['eventPrice'] = trim($input['eventPrice']);
+
+
 
 //check for empty fields
     if (empty($input['eventTitle']) || empty($input['eventDescription'])
@@ -98,15 +104,21 @@ function process_form($input)
         require_once("functions.php");
         $connection = getConnection();
 
-        //*****Something is going wrong here, db fields are not being added to the db***********
-        $insertSQL = "INSERT INTO NE_events (eventTitle, eventDescription, venueID, catID, eventStartDate, eventEndDate, eventPrice) 
-					  VALUES(:eventTitle, :eventDescription, :venueID, :catID, :eventStartDate, :eventEndDate, :eventPrice)";
-        $stmt = $connection->prepare($insertSQL);
+        //*****Something is going wrong here, db fields are not being updated to the db***********
+
+        $updateSQL = "UPDATE NE_events
+                      SET eventTitle = :eventTitle, eventDescription = :eventDescription, venueID = :venueID, catID = :catID,
+                       eventStartDate = :eventStartDate, eventEndDate = :eventEndDate, eventPrice = :eventPrice
+                       WHERE eventID = :eventID";
+
+
+        $stmt = $connection->prepare($updateSQL);
         $stmt->execute(array(':eventTitle' => $input['eventTitle'], ':eventDescription' => $input['eventDescription']
         , ':venueID' => $input['venueID'], ':catID' => $input['categoryID'], ':eventStartDate' => $input['eventStartDate']
-        , ':eventEndDate' => $input['eventEndDate'], ':eventPrice' => $input['eventPrice']));
+        , ':eventEndDate' => $input['eventEndDate'], ':eventPrice' => $input['eventPrice'], ':eventID' => $input['eventID'])); //do i need , ':eventPrice' => $input['eventPrice']
 
         echo "<h1>Event Details</h1>\n";
+        echo "<p>Event ID:  ".$input['eventID']."</p>\n";
         echo "<p>Event Title:  ".$input['eventTitle']."</p>\n";
         echo "<p>Event Description:".$input['eventDescription']."</p>\n";
         echo "<p>Venue: {$input['venueID']}</p>\n";

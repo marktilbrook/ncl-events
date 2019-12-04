@@ -9,16 +9,13 @@
 <p>Please select an event to edit</p>
 
 <!--this script will be referencing the adminFacility.html file for task 1-->
+<!--dont fuck with this its working fine-->
 <?php
 require_once "functions.php";
 set_session("logged-in","true");
 
 //this creates a reference to the connection which is in the functions.php file
 $connection = getConnection();
-
-
-
-
 
 
 //this displays the different events, from there, the user can go to editEvent.php
@@ -35,20 +32,8 @@ echo "</select>";
 echo "<input type='submit' value='Get Event Details'></form>";
 echo "<br><br>";
 
-
-
-
-
-
-
-
-
-
-
-
-
-
 ?>
+
 <script type="text/javascript">
 
 </script>
