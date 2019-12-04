@@ -28,7 +28,11 @@ function set_session($sessionKey, $value)
     session_start();
     return true;
 }//function set_session
- 
+
+
+
+
+
 function get_session($sessionKey)
 {
     $sessionValue = "";
@@ -44,19 +48,24 @@ function get_session($sessionKey)
 
 
 
-/*function check_login()
+function check_login()
 {
     return get_session('logged-in');
 }
 
 function log_out()
 {
-    //clear the session array
-    $_SESSION = array();
+    if (check_login())
+    {
+        //clear the session array
+        $_SESSION = array();
 
-    //destroy this bitch ass session
-    session_destroy();
+        //destroy this session
+        session_destroy();
 
-    echo "<p>You are now logged out.
-             Redirecting to Log In Page</p>\n";
-}*/
+        echo "<p>Logging Out!</p>\n";
+
+        header("Location: logInForm.php");
+    }
+
+}
