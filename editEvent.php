@@ -74,7 +74,7 @@ while ($rowObj = $queryResult->fetchObject()) {
     Event Start Date: <input type=\"date\" name=\"eventStartDate\" value='{$rowObj->eventStartDate}'>
     Event End Date: <input type=\"date\" name=\"eventEndDate\" value='{$rowObj->eventEndDate}'>
     Price <input type=\"text\" name=\"eventPrice\" value='{$rowObj->eventPrice}'>
-    <input type=\"submit\" value=\"Add Event\">
+    <input type=\"submit\" value=\"Edit Event\">
 </form>";
 }
 
@@ -83,7 +83,17 @@ while ($rowObj = $queryResult->fetchObject()) {
 
 ?>
 
+<!--//this works-->
+<?php
 
+
+echo "<form method=\"post\" action=\"logOut.php\" style='position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;'>
+    <input type=\"submit\" value=\"logout\">
+       </form>";
+?>
 
 
 
