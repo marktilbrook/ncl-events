@@ -12,7 +12,7 @@
 <!--dont fuck with this its working fine-->
 <?php
 require_once "functions.php";
-set_session("logged-in","true");
+set_session('logged-in','true');
 
 //this creates a reference to the connection which is in the functions.php file
 $connection = getConnection();
@@ -33,6 +33,21 @@ echo "<input type='submit' value='Get Event Details'></form>";
 echo "<br><br>";
 
 ?>
+
+
+<?php
+
+//todo how do i get the log out button to work - the functionality is in the functions.php file
+
+echo "<form method=\"post\" action=\"logOut.php\" style='position: absolute;
+  top: 8px;
+  right: 16px;
+  font-size: 18px;'>
+    <input type=\"submit\" value=\"logout\">
+       </form>";
+?>
+
+
 
 <script type="text/javascript">
 

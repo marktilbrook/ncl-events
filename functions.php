@@ -23,10 +23,11 @@ function set_session($sessionKey, $value)
 {
     //save path
     ini_set("session.save_path", "/home/unn_w17006267/sessionData");
+    session_start();
     // Set key element = value
     $_SESSION[$sessionKey] = $value;
-    session_start();
-    return true;
+
+    return $value;
 }//function set_session
 
 
@@ -35,10 +36,11 @@ function set_session($sessionKey, $value)
 
 function get_session($sessionKey)
 {
+
     $sessionValue = "";
-    if(isset($sessionKey))
+    if(isset($_SESSION['$sessionKey']))
     {
-        return $sessionValue = $_SESSION[$sessionKey];
+        $sessionValue = $_SESSION['$sessionKey'];
     }
     return $sessionValue;
 
@@ -65,7 +67,7 @@ function log_out()
 
         echo "<p>Logging Out!</p>\n";
 
-        header("Location: logInForm.php");
+//        header("Location: logInForm.php");
     }
 
 }

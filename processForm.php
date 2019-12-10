@@ -66,18 +66,11 @@ function validate_form()
         //does this mean its only 1 item in the array?
         $errors[] = 'Error found: Event Title must be less than 50 characters ';
     }
-//    //####Check with teacher,  would you use $input['price'] instead of $price to access the array variable?
-//    else if(filter_var($input['eventPrice'], FILTER_VALIDATE_INT))
-//    {
-//        $errors[] = 'Error found: Price MUST BE AN INTEGER';
-//    }
+    else if(filter_var($input['eventPrice'], FILTER_VALIDATE_INT))
+    {
+        $errors[] = 'Error found: Price MUST BE AN INTEGER';
+    }
 
-    //todo have a look at this for venueID and catID
-//    $categoryArray = array('c1', 'c2', 'c3');
-//    if (!in_array($input['categoryID'], $categoryArray))
-//    {
-//        $errors[] = 'Error found: Category not in array';
-//    }
 
     return array($input, $errors);
 }// function validateForm()
@@ -104,7 +97,7 @@ function process_form($input)
         require_once("functions.php");
         $connection = getConnection();
 
-        //*****Something is going wrong here, db fields are not being updated to the db***********
+        //this works - dont touch
 
         $updateSQL = "UPDATE NE_events
                       SET eventTitle = :eventTitle, eventDescription = :eventDescription, venueID = :venueID, catID = :catID,
