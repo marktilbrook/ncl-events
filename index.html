@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Index</title>
+</head>
+<body>
+<section class="navigation">
+    <div class="nav-container">
+        <div>
+            <a>Mark Tilbrook</a>
+        </div>
+        <nav>
+            <ul>
+                <li>
+                    <a href="logInForm.php">Log In</a>
+                </li>
+                <li>
+                    <!--technically you should not be able to access this section unless logged in.-->
+                    <a href="adminFacility.php">Admin Page</a>
+                </li>
+                <li>
+                    <!--this will display an error as you to edit an event you must first select it in the admin page-->
+                    <a href="editEvent.php">Edit Event Page</a>
+                </li>
+                <li>
+                    <a href="bookEventsForm.php">Book an Event</a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+</section>
+<aside  id="offers">
+    <!--add here-->
+</aside>
+<aside id="XMLoffers">
+
+</aside>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        "use strict";
+
+        const URL_OFFERS = 'getOffers.php'
+        const URL_xmlOffers = 'getOffers.php?useXML'
+
+        //this calls the fetch every 5 seconds
+        window.setInterval(function(){
+            fetch(URL_OFFERS)
+                .then(
+                    function (response) {
+                        return response.text();
+                    }
+                )
+                .then(
+                    function (data) {
+                        console.log(data);
+                        document.getElementById("offers").innerHTML = data;
+                    }
+                )
+        }, 5000);
+
+    });
+</script>
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        "use strict";
+
+        const URL_xmlOffers = 'getOffers.php?useXML';
+
+        fetch(URL_xmlOffers)
+            .then(
+                function (response) {
+                    return response.text();
+                }
+            )
+            .then(
+                function (data) {
+                    console.log(data);
+
+                    let parser = new DOMParser();
+                    let xmlDoc = parser.parseFromString(data, "text/xml");
+                    console.log(xmlDoc);
+
+                    document.getElementById("XMLoffers").innerHTML  = data;
+
+                }
+            )
+            .catch(
+                function (err) {
+                    console.log("ERROR: ", err);
+                }
+            )
+    });
+</script>
+</body>
+</html>
