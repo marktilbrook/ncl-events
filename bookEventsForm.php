@@ -108,5 +108,36 @@ echo "<form method=\"post\" action=\"logOut.php\" style='position: absolute;
 
     });
 </script>
+<!--this works, this answers question e-->
+<script type="text/javascript">
+    window.addEventListener('load', function () {
+        "use strict";
+        const l_form = document.getElementById("bookingForm");
+        const l_selectBox = document.querySelector("#makeBooking > select");
+        const customerDiv = document.querySelector("#retCustDetails");
+        const tradeDiv = document.querySelector("#tradeCustDetails");
+
+        l_selectBox.onchange = function()
+        {
+            let value = l_selectBox.options[l_selectBox.selectedIndex].value;
+            if (value == "ret")
+            {
+                //alert("got value");
+                customerDiv.style.visibility='visible';
+                tradeDiv.style.visibility='hidden';
+            }
+            else if (value == "trd")
+            {
+                customerDiv.style.visibility='hidden';
+                tradeDiv.style.visibility='visible';
+            }
+            else
+            {
+                customerDiv.style.visibility='hidden';
+                tradeDiv.style.visibility='hidden';
+            }
+        };
+    });
+</script>
 </body>
 </html>
